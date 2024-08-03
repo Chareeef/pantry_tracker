@@ -10,8 +10,10 @@ function ProfileClient({ user }: ClientProfileProps) {
         <Image
           src={user.picture as string}
           alt={user.name as string}
-          className="w-24 h-24 rounded-full mb-4"
-          layout="responsive"
+          height={100}
+          width={100}
+          className="border-2 border-white-500 rounded-full mb-4"
+          layout="intrinsic"
         />
         {user.name !== user.email ? (
           <>
@@ -45,7 +47,7 @@ function LandingPage() {
           alt="pantry icon"
           height={100}
           width={100}
-          layout="responsive"
+          layout="intrinsic"
         />
         <h1 className="text-4xl font-extrabold text-gray-800 m-4">
           Keep Track of Your Pantry Items

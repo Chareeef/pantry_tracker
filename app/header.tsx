@@ -16,7 +16,7 @@ export default function Header() {
             alt="Pantry app icon"
             width={32}
             height={32}
-            layout="responsive"
+            layout="intrinsic"
           />
           <h1 className="font-bold text-black ml-2">Pantry Tracker</h1>
         </a>

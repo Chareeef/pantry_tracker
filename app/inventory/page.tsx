@@ -48,7 +48,7 @@ function AddItemForm({
   }
 
   return (
-    <form className="flex flex-col md:flex-row items-center justify-around w-4/5 bg-lime-600 my-3 p-2">
+    <form className="flex flex-col md:flex-row items-center justify-around w-4/5 bg-lime-600 p-2">
       <input
         className="md:w-2/5 border-2 border-gray-600 focus:border-black-700 p-2"
         type="text"
@@ -200,17 +200,11 @@ export default function Home() {
   }, [user, isLoading]);
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center text-gray-500 text-xxl">
-        Loading...
-      </div>
-    );
+    return <div className="text-gray-500 text-xxl">Loading...</div>;
   }
 
   if (error) {
-    return (
-      <div className="flex items-center text-red text-xxl">{error.message}</div>
-    );
+    return <div className="text-red text-xxl">{error.message}</div>;
   }
 
   if (!user || typeof user.email !== "string") {
