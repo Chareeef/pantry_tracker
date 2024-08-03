@@ -8,7 +8,7 @@ export default function Header() {
   if (error) return <div>{error.message}</div>;
 
   return (
-    <header className="flex justify-between items-center p-2 bg-lime-500 border-b-2 border-lime-500">
+    <header className="flex justify-between items-center p-2 bg-lime-500 border-b-2 border-lime-500 text-xl">
       <div className="w-1/4">
         <a href="/" className="w-full flex items-center">
           <Image
