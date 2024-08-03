@@ -36,7 +36,7 @@ function ProfileClient({ user }: ClientProfileProps) {
 
 function LandingPage() {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center m-4">
       <header className="w-full p-4 bg-lime-500 text-white text-center text-2xl font-bold">
         Pantry Tracker
       </header>
