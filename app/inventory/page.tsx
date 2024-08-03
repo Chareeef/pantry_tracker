@@ -13,6 +13,14 @@ import {
 import { Product, AddItemFormProps, ProductsListProps } from "@/types";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { redirect } from "next/navigation";
+import { Andada_Pro } from "next/font/google";
+
+const andadaPro = Andada_Pro({
+  subsets: ["latin"],
+  weight: "600",
+  style: "italic",
+  variable: "--andada-pro",
+});
 
 function AddItemForm({
   newName,
@@ -40,16 +48,16 @@ function AddItemForm({
   }
 
   return (
-    <form className="w-full flex justify-between my-2">
+    <form className="flex flex-col md:flex-row items-center justify-around w-4/5 bg-lime-600 my-3 p-2">
       <input
-        className="flex-1 border-2 border-black-400 focus:border-black-700 p-2"
+        className="md:w-2/5 border-2 border-gray-600 focus:border-black-700 p-2"
         type="text"
         placeholder="Name"
         value={newName}
         onChange={(e) => setNewName(e.target.value)}
       />
       <input
-        className="flex-1 border-2 border-black-400 focus:border-black-700 p-2"
+        className="md:w-2/5 sm:border-2 md:border-x md:border-y-2 border-gray-600 focus:border-black-700 my-2 p-2"
         type="number"
         placeholder="Quantity"
         value={newQuantity > 0 ? newQuantity : ""}
@@ -57,7 +65,7 @@ function AddItemForm({
       />
       <button
         type="submit"
-        className="w-20 bg-lime-300 hover:bg-lime-500"
+        className="md:w-1/5 border-2 border-gray-600 p-2 bg-lime-300 hover:bg-lime-500"
         onClick={addProduct}
       >
         Add
@@ -79,12 +87,11 @@ function ProductsList({ products, email }: ProductsListProps) {
   }
 
   async function decrementProduct(product: Product) {
-    try {
-      if (product.quantity <= 1) {
-        deleteProduct(product.id);
-        return;
-      }
+    if (product.quantity === 0) {
+      return;
+    }
 
+    try {
       await setDoc(doc(db, "users", email, "products", product.id), {
         name: product.name,
         quantity: product.quantity - 1,
@@ -103,69 +110,67 @@ function ProductsList({ products, email }: ProductsListProps) {
   }
 
   return (
-    <>
-      <ul className="w-full bg-lime-600 border-4 border-green-800 p-4">
-        {products.length === 0 ? (
-          <div className="flex justify-center items-center font-bold p-30">
-            No Products Yet
-          </div>
-        ) : (
-          <>
-            <div className="flex justify-between w-4/5 bg-lime-500">
-              <div className="w-1/2 pl-1 border-t-2 border-l-2 border-r border-b border-white-500 font-bold capitalize">
-                Name
-              </div>
-              <div className="w-1/2 pl-1 border-t-2 border-x-2 border-b border-white-500 font-bold">
-                Quantity
-              </div>
+    <ul className="w-full bg-lime-600 border-4 border-green-800 p-4">
+      {products.length === 0 ? (
+        <div className="flex justify-center items-center font-bold p-30">
+          No Products Yet
+        </div>
+      ) : (
+        <>
+          <div className="flex justify-between w-4/5 bg-lime-500">
+            <div className="w-1/2 pl-1 border-t-2 border-l-2 border-r border-b border-white-500 font-bold capitalize">
+              Name
             </div>
-            {products.map((product: Product, idx) => (
-              <li
-                className="flex justify-between w-full bg-lime-500"
-                key={product.id}
-              >
-                <div className="flex w-4/5">
-                  <div
-                    className={`w-1/2 pl-1 border-t-2 border-l-2 border-r border-b${idx === products.length - 1 && `-2`} border-white-500 capitalize`}
-                  >
-                    {product.name}
-                  </div>
-                  <div
-                    className={`w-1/2 pl-1 border-t-2 border-l-2 border-r border-b${idx === products.length - 1 && "-2"} border-white-500`}
-                  >
-                    {product.quantity}
-                  </div>
+            <div className="w-1/2 pl-1 border-t-2 border-x-2 border-b border-white-500 font-bold">
+              Quantity
+            </div>
+          </div>
+          {products.map((product: Product, idx) => (
+            <li
+              className="flex justify-between w-full bg-lime-500"
+              key={product.id}
+            >
+              <div className="flex w-4/5">
+                <div
+                  className={`w-1/2 pl-1 border-t-2 border-l-2 border-r border-b${idx === products.length - 1 && `-2`} border-white-500 capitalize`}
+                >
+                  {product.name}
                 </div>
                 <div
-                  className={`flex w-1/5 border-t-2 border-l-2 border-r border-b${idx === products.length - 1 && "-2"} border-white-500`}
+                  className={`w-1/2 pl-1 border-t-2 border-l-2 border-r border-b${idx === products.length - 1 && "-2"} border-white-500`}
                 >
-                  <button
-                    className="flex-1 bg-lime-400 hover:bg-lime-500"
-                    onClick={() => incrementProduct(product)}
-                  >
-                    +
-                  </button>
-
-                  <button
-                    className="flex-1 bg-orange-400 hover:bg-orange-500 border-x-2 border-white-500"
-                    onClick={() => decrementProduct(product)}
-                  >
-                    -
-                  </button>
-
-                  <button
-                    className="flex-1 bg-red-400 hover:bg-red-500"
-                    onClick={() => deleteProduct(product.id)}
-                  >
-                    X
-                  </button>
+                  {product.quantity}
                 </div>
-              </li>
-            ))}
-          </>
-        )}
-      </ul>
-    </>
+              </div>
+              <div
+                className={`flex w-1/5 border-t-2 border-l-2 border-r border-b${idx === products.length - 1 && "-2"} border-white-500`}
+              >
+                <button
+                  className="flex-1 bg-lime-400 hover:bg-lime-500"
+                  onClick={() => incrementProduct(product)}
+                >
+                  +
+                </button>
+
+                <button
+                  className="flex-1 bg-orange-400 hover:bg-orange-500 border-x-2 border-white-500"
+                  onClick={() => decrementProduct(product)}
+                >
+                  -
+                </button>
+
+                <button
+                  className="flex-1 bg-red-400 hover:bg-red-500"
+                  onClick={() => deleteProduct(product.id)}
+                >
+                  X
+                </button>
+              </div>
+            </li>
+          ))}
+        </>
+      )}
+    </ul>
   );
 }
 
@@ -213,6 +218,9 @@ export default function Home() {
 
   return (
     <>
+      <h1 className={`${andadaPro.variable} text-3xl font-bold`}>
+        Manage Your Pantry
+      </h1>
       <AddItemForm
         newName={newName}
         setNewName={setNewName}

@@ -39,10 +39,8 @@ export default function RootLayout({
       <UserProvider>
         <body className={inter.className}>
           <Header />
-          <main className="flex min-h-screen flex-col items-center justify-between p-24 text-xl bg-lime-400">
-            <div className="z-10 w-full max-w-5xl items-center justify-between lg:flex">
-              {children}
-            </div>
+          <main className="flex min-h-screen flex-col items-center justify-around text-xl bg-lime-400 p-3">
+            {children}
           </main>
         </body>
       </UserProvider>

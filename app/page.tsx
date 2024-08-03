@@ -19,11 +19,74 @@ function ProfileClient({ user }: ClientProfileProps) {
         ) : (
           <h2 className="text-2xl font-semibold mb-2">{user.email}</h2>
         )}
-        <a href="/inventory" className="text-blue-500 hover:underline">
+        <a
+          href="/inventory"
+          className="bg-green-500 text-white py-2 px-4 rounded-full text-xl font-semibold hover:bg-lime-600 transition duration-200"
+        >
           Manage Your Pantry
         </a>
       </div>
     )
+  );
+}
+
+function LandingPage() {
+  return (
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+      <header className="w-full p-4 bg-lime-500 text-white text-center text-2xl font-bold">
+        Pantry Tracker
+      </header>
+
+      <main className="flex flex-col items-center justify-center flex-grow p-6">
+        <img src="/icon.png" alt="pantry icon" height={100} width={100} />
+        <h1 className="text-4xl font-extrabold text-gray-800 m-4">
+          Keep Track of Your Pantry Items
+        </h1>
+        <p className="text-lg text-gray-600 mb-6 text-center">
+          Easily manage your pantry inventory with our intuitive tracker. Know
+          what you have, what you need, and never run out of your essentials.
+        </p>
+        <a
+          href="/api/auth/login"
+          className="bg-lime-500 text-white py-2 px-4 rounded-full text-xl font-semibold hover:bg-lime-600 transition duration-200"
+        >
+          Get Started
+        </a>
+      </main>
+
+      <section className="w-full bg-white py-10">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-2xl font-bold text-center mb-6">
+            Why Choose Pantry Tracker?
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-gray-50 p-6 rounded-lg shadow text-center">
+              <h3 className="text-xl font-semibold mb-2">Easy to Use</h3>
+              <p className="text-gray-600">
+                Our user-friendly interface makes it easy to add, edit, and
+                remove items from your pantry inventory.
+              </p>
+            </div>
+            <div className="bg-gray-50 p-6 rounded-lg shadow text-center">
+              <h3 className="text-xl font-semibold mb-2">
+                Always Know Your Stock!
+              </h3>
+              <p className="text-gray-600">
+                Accurately monitor the quantity of every item in your pantry.
+              </p>
+            </div>
+            <div className="bg-gray-50 p-6 rounded-lg shadow text-center">
+              <h3 className="text-xl font-semibold mb-2">
+                Accessible Anywhere
+              </h3>
+              <p className="text-gray-600">
+                Access your pantry inventory from any device, anytime, anywhere.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
 
@@ -47,6 +110,6 @@ export default function Home() {
   if (user) {
     return <ProfileClient user={user} />;
   } else {
-    return <div>Welcome!</div>;
+    return <LandingPage />;
   }
 }

@@ -10,9 +10,11 @@ export default function Header() {
 
   return (
     <header className="flex justify-between items-center p-2 bg-lime-500 border-b-2 border-lime-500">
-      <div className="w-1/4 flex items-center">
-        <img src="/icon.png" width={32} height={32} />
-        <h1 className="font-bold text-black ml-2">Pantry Tracker</h1>
+      <div className="w-1/4">
+        <a href="/" className="w-full flex items-center">
+          <img src="/icon.png" width={32} height={32} />
+          <h1 className="font-bold text-black ml-2">Pantry Tracker</h1>
+        </a>
       </div>
       {isLoading && (
         <div className="w-25 bg-lime-600 border-2 border-black p-2 font-bold text-center">
@@ -23,16 +25,16 @@ export default function Header() {
       {!isLoading && !user && (
         <a
           href="/api/auth/login"
-          className="w-25 bg-lime-600 border-2 border-black p-2 font-bold text-center"
+          className="flex justify-center items-center bg-lime-600 border-2 border-black p-2 font-bold text-center"
         >
-          Sign In
+          Sign In/Up
         </a>
       )}
 
       {!isLoading && user && (
         <a
           href="/api/auth/logout"
-          className="w-25 bg-lime-600 border-2 border-black p-2 font-bold text-center"
+          className="flex justify-center items-center bg-lime-600 border-2 border-black p-2 font-bold text-center"
         >
           Sign Out
         </a>
