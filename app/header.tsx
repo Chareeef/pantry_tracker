@@ -1,6 +1,5 @@
 "use client";
-"use client";
-
+import Image from "next/image";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function Header() {
@@ -12,7 +11,13 @@ export default function Header() {
     <header className="flex justify-between items-center p-2 bg-lime-500 border-b-2 border-lime-500">
       <div className="w-1/4">
         <a href="/" className="w-full flex items-center">
-          <img src="/icon.png" width={32} height={32} />
+          <Image
+            src="/icon.png"
+            alt="Pantry app icon"
+            width={32}
+            height={32}
+            layout="responsive"
+          />
           <h1 className="font-bold text-black ml-2">Pantry Tracker</h1>
         </a>
       </div>

@@ -1,15 +1,17 @@
 "use client";
 import { ClientProfileProps } from "@/types";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import Image from "next/image";
 
 function ProfileClient({ user }: ClientProfileProps) {
   return (
     user && (
       <div className="flex flex-col items-center bg-lime-500 p-4">
-        <img
-          src={user.picture}
-          alt={user.name}
+        <Image
+          src={user.picture as string}
+          alt={user.name as string}
           className="w-24 h-24 rounded-full mb-4"
+          layout="responsive"
         />
         {user.name !== user.email ? (
           <>
@@ -38,7 +40,13 @@ function LandingPage() {
       </header>
 
       <main className="flex flex-col items-center justify-center flex-grow p-6">
-        <img src="/icon.png" alt="pantry icon" height={100} width={100} />
+        <Image
+          src="/icon.png"
+          alt="pantry icon"
+          height={100}
+          width={100}
+          layout="responsive"
+        />
         <h1 className="text-4xl font-extrabold text-gray-800 m-4">
           Keep Track of Your Pantry Items
         </h1>

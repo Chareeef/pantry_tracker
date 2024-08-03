@@ -189,7 +189,8 @@ export default function Home() {
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const productsArray: Product[] = [];
         querySnapshot.forEach((doc) => {
-          productsArray.push({ id: doc.id, ...doc.data() });
+          const data = doc.data() as Omit<Product, "id">;
+          productsArray.push({ id: doc.id, ...data });
         });
         setProducts(productsArray);
       });
