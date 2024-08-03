@@ -1,6 +1,8 @@
+import Header from "./header";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,7 +35,17 @@ export default function RootLayout({
           sizes="<generated>"
         />
       </head>
-      <body className={inter.className}>{children}</body>
+
+      <UserProvider>
+        <body className={inter.className}>
+          <Header />
+          <main className="flex min-h-screen flex-col items-center justify-between p-24 text-xl bg-lime-400">
+            <div className="z-10 w-full max-w-5xl items-center justify-between lg:flex">
+              {children}
+            </div>
+          </main>
+        </body>
+      </UserProvider>
     </html>
   );
 }
