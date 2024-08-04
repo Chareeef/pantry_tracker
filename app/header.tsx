@@ -11,13 +11,7 @@ export default function Header() {
     <header className="flex justify-between items-center p-2 bg-lime-500 border-b-2 border-lime-500 text-xl">
       <div className="w-1/4">
         <a href="/" className="w-full flex items-center">
-          <Image
-            src="/icon.png"
-            alt="Pantry app icon"
-            width={32}
-            height={32}
-            layout="intrinsic"
-          />
+          <Image src="/icon.png" alt="Pantry app icon" width={32} height={32} />
           <h1 className="font-bold text-black ml-2">Pantry Tracker</h1>
         </a>
       </div>

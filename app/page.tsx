@@ -13,7 +13,6 @@ function ProfileClient({ user }: ClientProfileProps) {
           height={100}
           width={100}
           className="border-2 border-white-500 rounded-full mb-4"
-          layout="intrinsic"
         />
         {user.name !== user.email ? (
           <>
@@ -42,13 +41,7 @@ function LandingPage() {
       </header>
 
       <main className="flex flex-col items-center justify-center flex-grow p-6">
-        <Image
-          src="/icon.png"
-          alt="pantry icon"
-          height={100}
-          width={100}
-          layout="intrinsic"
-        />
+        <Image src="/icon.png" alt="pantry icon" height={100} width={100} />
         <h1 className="text-4xl font-extrabold text-gray-800 m-4">
           Keep Track of Your Pantry Items
         </h1>

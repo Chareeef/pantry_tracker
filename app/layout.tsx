@@ -1,4 +1,5 @@
 import Header from "./header";
+import Footer from "./footer";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -38,11 +39,12 @@ export default function RootLayout({
       </head>
 
       <UserProvider>
-        <body className={inter.className}>
+        <body className={`flex flex-col h-dvh ${inter.className}`}>
           <Header />
-          <main className="flex min-h-screen flex-col justify-center items-center gap-8 text-xl bg-lime-400 px-3">
+          <main className="flex-grow flex flex-col justify-center items-center gap-8 text-xl bg-lime-400 p-3">
             {children}
           </main>
+          <Footer />
           <Analytics />
         </body>
       </UserProvider>

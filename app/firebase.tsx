@@ -3,12 +3,12 @@ import { getFirestore } from "firebase/firestore";
 
 // The web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC51uWw9kHwfBHEZ76zM_KpIcyH7f3dfL4",
-  authDomain: "pantry-tracker-84937.firebaseapp.com",
-  projectId: "pantry-tracker-84937",
-  storageBucket: "pantry-tracker-84937.appspot.com",
-  messagingSenderId: "923194547443",
-  appId: "1:923194547443:web:4509bb27cf9f06040b2b86",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
