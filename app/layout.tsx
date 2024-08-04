@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,6 +43,7 @@ export default function RootLayout({
           <main className="flex min-h-screen flex-col justify-center items-center gap-8 text-xl bg-lime-400 px-3">
             {children}
           </main>
+          <Analytics />
         </body>
       </UserProvider>
     </html>

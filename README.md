@@ -4,7 +4,7 @@ Pantry Tracker is a Next.js application that helps you keep track of your pantry
 
 ## Features
 
-- **User Authentication**: Secure user authentication with NextAuth.
+- **User Authentication**: Secure user authentication with Auth0.
 - **Real-time Inventory**: Track pantry items with real-time updates using Firestore.
 - **Responsive Design**: A user-friendly, responsive interface built with Tailwind CSS.
 
@@ -17,7 +17,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 - Node.js
 - npm or yarn
 - Firebase project (with Firestore)
-- NextAuth provider setup (e.g., Google, GitHub, etc.)
+- Auth0 provider setup (e.g., Google, GitHub, etc.)
 
 ### Installation
 
@@ -36,7 +36,7 @@ Follow these instructions to get a copy of the project up and running on your lo
    yarn install
    ```
 
-3. Create a `.env.local` file in the root directory and add your environment variables for Firebase and NextAuth configurations.
+3. Create a `.env.local` file in the root directory and add your environment variables for Firebase and Auth0 configurations.
 
 4. Start the development server:
 
