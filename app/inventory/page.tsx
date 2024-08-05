@@ -10,10 +10,17 @@ import {
   query,
   setDoc,
 } from "firebase/firestore";
-import { Product, AddItemFormProps, ProductsListProps } from "@/types";
+import {
+  Product,
+  AddItemFormProps,
+  ProductsListProps,
+  Idea,
+  IdeasListProps,
+} from "@/types";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { redirect } from "next/navigation";
 import { Andada_Pro } from "next/font/google";
+import generateIdeasList from "./generateIdeasList";
 
 const andadaPro = Andada_Pro({
   subsets: ["latin"],
@@ -174,11 +181,78 @@ function ProductsList({ products, email }: ProductsListProps) {
   );
 }
 
+function IdeasList({ isOpen, onClose, products }: IdeasListProps) {
+  const [ideasArray, setIdeasArray] = useState<Idea[]>([]);
+  const [loading, setLoading] = useState<string>("");
+  const [error, setError] = useState<string>("");
+
+  async function handleClickIdeas() {
+    setError("");
+    setLoading("Loading...");
+    const ideas: Idea[] | null = await generateIdeasList(products);
+    if (!ideas) {
+      setIdeasArray([]);
+      setError("Oops... Try again please.");
+    } else {
+      setIdeasArray(ideas);
+      setError("");
+    }
+    setLoading("");
+  }
+
+  return (
+    <div
+      className={`fixed inset-0 p-4 transition-colors ${isOpen ? "visible bg-black/20" : "invisible"}`}
+    >
+      <div className="flex justify-center items-center overflow-y-auto h-full w-full">
+        <div
+          className={`bg-white p-4 flex flex-col justify-between overflow-y-auto max-h-full w-2/3 rounded-xl shadow text-center transition-all ${isOpen ? "scale-125 opacity-100" : "scale-100 opacity-0"}`}
+        >
+          <h2 className="text-xxl text-black mb-4">
+            Your Pantry has amazing items!
+          </h2>
+          {ideasArray.length > 0 && (
+            <ul className="list-none flex flex-col md:flex-row">
+              {ideasArray.map((idea, idx) => (
+                <li
+                  key={idx}
+                  className="flex flex-col justify-evenly shadow border-2 border-gray-400 rounded-lg p-2 m-2"
+                >
+                  <h2 className="font-bold text-lime-700 text-xl">
+                    {idea.ideaName}
+                  </h2>
+                  <p className="text-gray-800 text-lg">{idea.description}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {loading && <p className="text-gray-600 my-4 font-bold">{loading}</p>}
+          {error && <p className="text-rose-600 my-4 font-bold">{error}</p>}
+
+          <div className="flex justify-around gap-4 flex-col md:flex-row">
+            <button
+              className="bg-green-600 p-3 m rounded"
+              onClick={handleClickIdeas}
+            >
+              Generate ideas
+            </button>
+            <button className="bg-rose-600 p-3 rounded" onClick={onClose}>
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const { user, isLoading, error } = useUser();
   const [products, setProducts] = useState<Product[]>([]);
   const [newName, setNewName] = useState<string>("");
   const [newQuantity, setNewQuantity] = useState<number>(0);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (isLoading) return; // Do nothing while loading
@@ -222,6 +296,17 @@ export default function Home() {
         newQuantity={newQuantity}
         setNewQuantity={setNewQuantity}
         email={user.email}
+      />
+      <button
+        onClick={() => setIsOpen(true)}
+        className="bg-green-600 p-3 rounded"
+      >
+        Generate Ideas ?
+      </button>
+      <IdeasList
+        products={products}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
       />
       <ProductsList products={products} email={user.email} />
     </>

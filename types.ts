@@ -1,5 +1,5 @@
 import { UserProfile } from "@auth0/nextjs-auth0/client";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, MouseEventHandler, SetStateAction } from "react";
 
 export interface ClientProfileProps {
   user: UserProfile;
@@ -22,4 +22,15 @@ export interface AddItemFormProps {
 export interface ProductsListProps {
   products: Product[];
   email: string;
+}
+
+export interface Idea {
+  ideaName: string;
+  description: string;
+}
+
+export interface IdeasListProps {
+  isOpen: boolean;
+  onClose: MouseEventHandler<HTMLButtonElement>;
+  products: Product[];
 }
