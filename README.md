@@ -2,11 +2,18 @@
 
 Pantry Tracker is a Next.js application that helps you keep track of your pantry items. Easily manage your inventory, know what you have, and never run out of your essentials.
 
+![Screenshot_20240804-033509_Kiwi Browser](https://github.com/user-attachments/assets/1f53f1e9-4dc0-4db8-8903-ace673ea5595)
+
+
 ## Features
 
 - **User Authentication**: Secure user authentication with Auth0.
 - **Real-time Inventory**: Track pantry items with real-time updates using Firestore.
 - **Responsive Design**: A user-friendly, responsive interface built with Tailwind CSS.
+- **Ideas Generation**: Get creative ideas based on your own pantry using AI.
+
+![Screenshot_20240805-211157_Kiwi Browser](https://github.com/user-attachments/assets/3f26b5da-232f-40b3-b53e-5b9601e2742c)
+
 
 ## Getting Started
 
